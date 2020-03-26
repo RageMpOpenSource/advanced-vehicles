@@ -26,3 +26,13 @@ mp.events.addCommand('car', (player) => {
 mp.events.addCommand('car2', (player) => {
     mp.vehicles.new(mp.joaat('elegy'), player.position);
 });
+
+
+//  Remove these when the clientside is fixed
+mp.events.add('playerEnterVehicle', (player, vehicle) => {
+    player.call('client:playerEnterVehicle');
+})
+
+mp.events.add('playerExitVehicle', (player) => {
+    player.call('client:playerExitVehicle');
+})
