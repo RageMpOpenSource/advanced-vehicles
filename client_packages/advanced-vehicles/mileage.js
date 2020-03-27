@@ -7,7 +7,7 @@ mp.events.add('client:playerEnterVehicle', () => {
     }
 });
 
-mp.events.add('client:playerExitVehicle', () => {
+mp.events.add('playerLeaveVehicle', () => {
     clearInterval(distTimer);
 });
 
