@@ -13,6 +13,7 @@
  */
 
 require('./extends/Vehicle.js');
+require('./mileage.js');
 
 mp.events.addCommand('engine', (player) => {
     player.vehicle.toggleEngine();
@@ -27,12 +28,11 @@ mp.events.addCommand('car2', (player) => {
     mp.vehicles.new(mp.joaat('elegy'), player.position);
 });
 
+mp.events.addCommand('bmx', (player) => {
+    mp.vehicles.new(mp.joaat('bmx'), player.position);
+});
 
 //  Remove these when the clientside is fixed
 mp.events.add('playerEnterVehicle', (player, vehicle) => {
     player.call('client:playerEnterVehicle');
-})
-
-mp.events.add('playerExitVehicle', (player) => {
-    player.call('client:playerExitVehicle');
-})
+});

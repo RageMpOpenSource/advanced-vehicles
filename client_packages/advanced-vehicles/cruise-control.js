@@ -13,7 +13,7 @@ mp.events.add('render', () => {
 
 mp.keys.bind(0x59, true, function() {   // Y Key
     if(mp.players.local.vehicle){
-        if(isDriver() === true){
+        if(isDriver() && !mp.game.vehicle.isThisModelABicycle(mp.players.local.vehicle.model)){
             toggleCruise();
         }
     }
@@ -40,12 +40,14 @@ function toggleCruise(){
 
 mp.events.add("render", () => {
     if(isDriver()){
-        let text = cruiseEnabled ? `Cruise Control` : `~r~Cruise Control`
-        mp.game.graphics.drawText(text, [0.9, 0.75], { 
-            font: 4, 
-            color: [119, 209, 113, 255], 
-            scale: [0.5, 0.5], 
-            outline: true
-        });
+        if(!mp.game.vehicle.isThisModelABicycle(mp.players.local.vehicle.model)){
+            let text = cruiseEnabled ? `Cruise Control` : `~r~Cruise Control`
+            mp.game.graphics.drawText(text, [0.9, 0.75], { 
+                font: 4, 
+                color: [119, 209, 113, 255], 
+                scale: [0.5, 0.5], 
+                outline: true
+            });
+        }
     }
 });
