@@ -1,6 +1,6 @@
 let distTimer, miles = 0;
 
-mp.events.add('client:playerEnterVehicle', () => {
+mp.events.add('playerEnterVehicle', () => {
     if(!mp.game.vehicle.isThisModelABicycle(mp.players.local.vehicle.model) && isDriver()){
         mileageCounter();
     }

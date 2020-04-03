@@ -1,22 +1,17 @@
 /**
  * Todo:
- *  [x] Engine status (off when spawned, should stay on when out)
- *  [x] Cruise control
- *  [ ] Calculate distance travelled (mileage)
  *  [ ] Toggle Vehicle doors (inc trunk and hood)
  *  [ ] Fuel
  *  [ ] Battery Life(?)
- *  [ ] Odometer
  *  [ ] GPS Location display
  *  [ ] Tires worn out(?)
- *  [x] Indicator lights
  */
 
 require('./extends/Vehicle.js');
 require('./mileage.js');
 
 mp.events.addCommand('engine', (player) => {
-    player.vehicle.toggleEngine();
+    player.vehicle ? player.vehicle.toggleEngine() : player.outputChatBox("You need to be in a vehicle to use this command.");
 });
 
 //  Testing vehicles, to be removed
@@ -30,9 +25,4 @@ mp.events.addCommand('car2', (player) => {
 
 mp.events.addCommand('bmx', (player) => {
     mp.vehicles.new(mp.joaat('bmx'), player.position);
-});
-
-//  Remove these when the clientside is fixed
-mp.events.add('playerEnterVehicle', (player, vehicle) => {
-    player.call('client:playerEnterVehicle');
 });
