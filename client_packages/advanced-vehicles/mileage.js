@@ -31,7 +31,7 @@ function mileageCounter() {
     let veh = mp.players.local.vehicle;
     let lastPos = veh.position;
     let speed = 0;
-    isNaN(mp.players.local.vehicle.getVariable('miles')) ? miles = 0 : miles = mp.players.local.vehicle.getVariable('miles')
+    isNaN(mp.players.local.vehicle.getVariable('miles')) ? miles = 0 : miles = mp.players.local.vehicle.getVariable('miles');
     distTimer = setInterval(() => {
         speed = (veh.getSpeed() * 2.236936).toFixed(0);
         miles += speed/3600;    

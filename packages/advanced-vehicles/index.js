@@ -1,6 +1,5 @@
 /**
  * Todo:
- *  [ ] Toggle Vehicle doors (inc trunk and hood)
  *  [ ] Fuel
  *  [ ] Battery Life(?)
  *  [ ] GPS Location display
@@ -24,6 +23,7 @@ mp.events.add("entityCreated", (entity) => {
     if(entity.type === "vehicle"){
         entity.setVariable('miles', 0);
         entity.setVariable('doors', [{0: false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false}]);
+        entity.setVariable('fuel', 100);
     }
 });
 
