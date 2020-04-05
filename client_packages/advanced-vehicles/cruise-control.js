@@ -1,13 +1,25 @@
-let cruiseSpeed;
-let cruiseEnabled = false;
+let cruiseSpeed = 0, cruiseEnabled = false;
 
 mp.events.add('render', () => {
+    //  Speed Control
     if(cruiseEnabled){
         mp.players.local.vehicle.setForwardSpeed(cruiseSpeed);
         //  Auto disable cruise control if any of the following happen
         if(mp.players.local.vehicle.hasCollidedWithAnything()) return toggleCruise();   // Collision Check
         if(mp.game.controls.isControlPressed(2, 76) || mp.game.controls.isControlPressed(2, 72) || mp.game.controls.isControlJustPressed(27, 71)) return toggleCruise();     //  Acceleration & Brake Check
         if(mp.players.local.vehicle.isInAir()) return toggleCruise();   //  Car in air check
+    }
+    //  HUD
+    if(isDriver()){
+        if(!mp.game.vehicle.isThisModelABicycle(mp.players.local.vehicle.model)){
+            let text = cruiseEnabled ? `Cruise Control` : `~r~Cruise Control`
+            mp.game.graphics.drawText(text, [0.9, 0.75], { 
+                font: 4, 
+                color: [119, 209, 113, 255], 
+                scale: [0.5, 0.5], 
+                outline: true
+            });
+        }
     }
 });
 
@@ -37,17 +49,3 @@ function toggleCruise(){
         }
     }
 }
-
-mp.events.add("render", () => {
-    if(isDriver()){
-        if(!mp.game.vehicle.isThisModelABicycle(mp.players.local.vehicle.model)){
-            let text = cruiseEnabled ? `Cruise Control` : `~r~Cruise Control`
-            mp.game.graphics.drawText(text, [0.9, 0.75], { 
-                font: 4, 
-                color: [119, 209, 113, 255], 
-                scale: [0.5, 0.5], 
-                outline: true
-            });
-        }
-    }
-});

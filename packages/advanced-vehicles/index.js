@@ -8,6 +8,7 @@
 
 require('./extends/Vehicle.js');
 require('./mileage.js');
+require('./fuel.js');
 
 mp.events.addCommand('engine', (player) => {
     player.vehicle ? player.vehicle.toggleEngine() : player.outputChatBox("You need to be in a vehicle to use this command.");
