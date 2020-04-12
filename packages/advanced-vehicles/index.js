@@ -1,6 +1,5 @@
 /**
  * Todo:
- *  [ ] Fuel
  *  [ ] Battery Life(?)
  *  [ ] GPS Location display
  *  [ ] Tires worn out(?)
@@ -22,11 +21,18 @@ mp.events.addCommand('door', (player, doorid) => {
 //  Used to set the initial variables on a new vehicle
 mp.events.add("entityCreated", (entity) => {
     if(entity.type === "vehicle"){
-        entity.setVariable('miles', 0);
-        entity.setVariable('doors', [{0: false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false}]);
-        entity.setVariable('fuel', 100);
+        entity.setVariables({
+            "miles": 0,
+            "doors": [{0: false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false}],
+            "fuel": 100,
+            "wheels": [{id: 0, damaged: false, miles: 0}, {id: 1, damaged: false, miles: 0}, {id: 4, damaged: false, miles: 0}, {id: 5, damaged: false, miles: 0}]
+        });
     }
 });
+
+mp.events.addCommand('wheels', (player) => {
+    player.outputChatBox(`${JSON.stringify(player.vehicle.getVariable('wheels'))}`)
+})
 
 //  Testing vehicles, to be removed
 mp.events.addCommand('car', (player) => {
