@@ -1,5 +1,7 @@
+let driver = false;
+
 mp.events.add("render", () => {
-    if(isDriver()){
+    if(driver){
         mp.game.graphics.drawText(`Speed: ~w~${(mp.players.local.vehicle.getSpeed() * 2.236936).toFixed(0)} MPH`, [0.9, 0.7], { 
             font: 4, 
             color: [231, 76, 60, 255], 
@@ -9,6 +11,10 @@ mp.events.add("render", () => {
     }
 });
 
-function isDriver() {
-    if(mp.players.local.vehicle) return mp.players.local.vehicle.getPedInSeat(-1) === mp.players.local.handle;
-}
+mp.events.add('playerEnterVehicle', (vehicle, seat) => {
+    if(seat === -1) return driver = true;
+});
+
+mp.events.add('playerLeaveVehicle', (vehicle, seat) => {
+    if(seat === -1) return driver = false;
+});
