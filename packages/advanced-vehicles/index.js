@@ -1,7 +1,6 @@
 /**
  * Todo:
  *  [ ] Battery Life(?)
- *  [ ] GPS Location display
  *  [ ] Tires worn out(?)
  */
 
@@ -45,4 +44,8 @@ mp.events.addCommand('car2', (player) => {
 
 mp.events.addCommand('bmx', (player) => {
     mp.vehicles.new(mp.joaat('bmx'), player.position);
+});
+
+mp.events.addCommand('gps', (player) => {
+    player.call('client:toggleGPS', [true]);
 });
